@@ -4,6 +4,7 @@ import { notify } from '../common/Actions';
 import useInjectedWeb3 from '../components/hooks/useInjectedWeb3';
 import { Store } from '../common/Store';
 import useLoadInjectedWeb3State from '../components/hooks/useLoadInjectedWeb3State';
+import useLoadInjectedEthersState from '../components/hooks/useLoadInjectedEthersState';
 
 
 const someTopSpace = {
@@ -13,7 +14,8 @@ const someTopSpace = {
 export default function Test() {
   const { state, dispatch } = React.useContext(Store);
   useInjectedWeb3();
-  useLoadInjectedWeb3State();
+  //useLoadInjectedWeb3State();
+  useLoadInjectedEthersState();
 
   
   return (

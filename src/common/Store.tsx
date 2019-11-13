@@ -9,7 +9,8 @@ export enum ActionType {
   SET_SELECTED_ETH_ADDR = "kodeart/SET_SELECTED_ETH_ADDR",
   SET_ETH_WEB3 = "kodeart/SET_ETH_WEB3",
   SET_ETH_BALANCE = "kodeart/SET_ETH_BALANCE",
-  SET_INJECTED_PROVIDER = "kodeart/SET_INJECTED_PROVIDER"
+  SET_INJECTED_PROVIDER = "kodeart/SET_INJECTED_PROVIDER",
+  SET_ETHERS_PROVIDER = "kodeart/SET_ETHERS_PROVIDER"
 }
 
 
@@ -17,7 +18,8 @@ const initialState: IAppState = {
   selectedEthAddr: '--',
   ethWeb3: null,
   ethBalance: '--',
-  injectedProvider: null
+  injectedProvider: null,
+  ethersProvider: null
 };
 
 
@@ -40,7 +42,11 @@ function reducer(state: IAppState, action: IAction | any): IAppState {
     case ActionType.SET_INJECTED_PROVIDER:
         return {
           ...state, injectedProvider: action.payload
-        }
+      }
+    case ActionType. SET_ETHERS_PROVIDER:
+        return {
+          ...state, ethersProvider: action.payload
+      }
 
     default:
       return state;

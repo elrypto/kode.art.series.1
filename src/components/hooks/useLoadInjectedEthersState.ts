@@ -1,14 +1,17 @@
 import React from 'react';
 import { Store, ActionType } from '../../common/Store';
-import Web3 from 'web3';
+import { ethers } from 'ethers';
 
 
 
-export default function useLoadInjectedWeb3State() {
+export default function useLoadInjectedEthersState() {
   const { state, dispatch } = React.useContext(Store);
 
+  
   React.useEffect(() => {
     if (state.injectedProvider){
+      console.log("using ethers");
+
       if (state.injectedProvider.selectedAddress){
 
         dispatch({
@@ -27,13 +30,13 @@ export default function useLoadInjectedWeb3State() {
   React.useEffect(() => {
     const fetchBalance = async() => {
       if (state.injectedProvider){
-        let w3: Web3 = new Web3(state.injectedProvider);
-        let b = await w3.eth.getBalance(state.selectedEthAddr);
-        let converted = w3.utils.fromWei(b, 'ether');
+        let provider = new ethers.providers.Web3Provider(state.injectedProvider);
+        let balance = await provider.getBalance(state.selectedEthAddr);
+        let converted = await ethers.utils.formatEther(balance);
 
         dispatch({
-          type: ActionType.SET_ETH_WEB3,
-          payload: w3
+          type: ActionType.SET_ETHERS_PROVIDER,
+          payload: provider
         })
 
         dispatch({
@@ -48,3 +51,4 @@ export default function useLoadInjectedWeb3State() {
     }
   }, [state.selectedEthAddr])
 }
+
